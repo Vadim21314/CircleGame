@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+ 		.circle{
+ 			background: red;
+ 			width: 60px;
+ 			height: 60px;
+ 			border-radius: 100%;
+ 			position: absolute;
+ 			opacity: .3;
+ 			transition: 9s;
+ 		}
+ 		.twowe{
+ 			background: yellow;
+ 			width: 60px;
+ 			height: 60px;
+ 			border-radius: 100%;
+ 			position: absolute;
+ 			opacity: .3;
+ 		}
+ 		.tri{
+ 			background: green;
+ 			width: 60px;
+ 			height: 60px;
+ 			border-radius: 100%;
+ 			position: absolute;
+ 			opacity: .3;
+ 		}
+ 		.four{
+ 			background: blue;
+ 			width: 60px;
+ 			height: 60px;
+ 			border-radius: 100%;
+ 			position: absolute;
+ 			opacity: .3;
+ 		}
+ 	</style>
+</head>
+ 	
+<body>
+	<h2 style="margin-left: 20px">Score: <span class="score">0</span></h2>
+	<h2 style="margin-left: 20px">Time: <span class="time">10</span></h2>
+	<h3>Собери 16 очков за 10 секунд</h3>
+	<div class="circle" style="left:100px;top: 342px"></div>
+	<div class="circle" style="left:1000px;top: 456px"></div>
+	<div class="circle" style="left:553px;top: 334px"></div>
+	<div class="circle" style="left:233px;top: 267px"></div>
+
+	<div class="circle" style="left:454px;top: 447px"></div>
+	<div class="circle" style="left:123px;top: 345px"></div>
+	<div class="circle" style="left:598px;top: 536px"></div>
+	<div class="circle" style="left:832px;top: 265px"></div>
+
+	<div class="circle" style="left:1036px;top: 200px"></div>
+	<div class="circle" style="left:456px;top: 600px"></div>
+	<div class="circle" style="left:634px;top: 80px"></div>
+	<div class="circle" style="left:756px;top: 234px"></div>
+
+	<div class="circle" style="left:968px;top: 533px"></div>
+	<div class="circle" style="left:324px;top: 200px"></div>
+	<div class="circle" style="left:546px;top: 32px"></div>
+	<div class="circle" style="left:802px;top: 432px"></div>
+	<script>
+	function random(){
+		let x = Math.random() * window.screen.width - 100;
+		let y = Math.round(x);
+		return y;
+	}
+	let score = 0;
+	let score_elem = document.querySelector(".score");
+	let circle = document.querySelectorAll(".circle");
+	for(let i = 0; i < circle.length; i++){
+		circle[i].onclick = function(){
+			circle[i].style.display = "none";
+			score = score + 1;
+			score_elem.innerHTML = score;
+			if(score == 16){
+				alert('Победа')
+				clearInterval(int1)
+				clearTimeout(int2)
+			}
+		}
+	}
+	let time = 10;
+	let time_elem = document.querySelector(".time");
+	let int1 = setInterval(timer, 1000);
+	function timer(){
+		time = time - 1
+		time_elem.innerHTML = time;
+		for(let i = 0; i < circle.length; i++){
+			circle[i].style.left = random()+'px'
+		}
+	};
+
+	let int2 = setTimeout(finish, 10000);
+	function finish(){
+		clearInterval(int1);
+		if(score == 16){
+			alert('Победа')
+		}else{
+			alert('Проигрыш')
+		}
+
+	};
+	</script>
+</body>
+</html>
